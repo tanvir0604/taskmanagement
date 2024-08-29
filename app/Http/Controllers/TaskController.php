@@ -112,10 +112,14 @@ class TaskController extends Controller
 
     function updatePriority(Request $request) {
         $priorities = $ids = [];
+        // extract all of the information to array
         for ($i=0; $i < count($request->item); $i++) {
             [$priorities[], $ids[]] = explode('s', $request->item[$i]);
         }
+        // sort all priority data
         sort($priorities);
+        
+        // reassign sorted priority data
         foreach ($ids as $key => $value) {
             $task = Task::find($value);
             $task->priority = $priorities[$key];

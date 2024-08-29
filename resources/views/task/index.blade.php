@@ -32,7 +32,10 @@
     <script type="text/javascript">
 
     function updateDb(){
+        // get all the id field value of the items in sorted order
         let sortedItems = $('.draggable').sortable("serialize");
+
+        // send all the data to server
         $.ajax({
             url: "<?php echo route('update-priority') ?>",
             data: sortedItems+'&project=<?php echo request()->get('project'); ?>',
@@ -50,6 +53,7 @@
             ghostClass: "blue-background-class",
             cursor: 'move',
             stop: function(e, ui){
+                // event fire when a drag is completed
                 updateDb();    
             }
             
